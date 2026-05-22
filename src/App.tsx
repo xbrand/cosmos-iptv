@@ -4,7 +4,10 @@ import {
   SpatialNavigationNode,
 } from 'react-tv-space-navigation';
 import { useUIStore, useChannelStore } from './store';
-import { configureSpatialNavigation } from './hooks/useSpatialNavigation';
+import {
+  configureSpatialNavigation,
+  setGlobalBackHandler,
+} from './hooks/useSpatialNavigation';
 import { ChannelsScreen } from './screens/ChannelsScreen';
 import { FavouritesScreen } from './screens/FavouritesScreen';
 import { EPGScreen } from './screens/EPGScreen';
@@ -21,16 +24,31 @@ const NAV_ITEMS = [
 ] as const;
 
 export default function App() {
-  useEffect(() => {
-    configureSpatialNavigation();
-  }, []);
-
-  const { activeView, setActiveView, isPlayerVisible } = useUIStore();
+  const { activeView, setActiveView, isPlayerVisible, setPlayerVisible } = useUIStore();
   const { currentChannel } = useChannelStore();
+
+  useEffect(() => {
+    const cleanup = configureSpatialNavigation();
+
+    // Register global back-button handler
+    setGlobalBackHandler(() => {
+      if (isPlayerVisible) {
+        setPlayerVisible(false);
+        useChannelStore.getState().setCurrentChannel(null);
+      }
+    });
+
+    return cleanup;
+  }, [isPlayerVisible]);
 
   const handlePlay = (channel: Channel) => {
     useChannelStore.getState().setCurrentChannel(channel);
     useUIStore.getState().setPlayerVisible(true);
+  };
+
+  const handleClosePlayer = () => {
+    setPlayerVisible(false);
+    useChannelStore.getState().setCurrentChannel(null);
   };
 
   return (
@@ -75,10 +93,7 @@ export default function App() {
         {isPlayerVisible && currentChannel && (
           <VideoPlayer
             channel={currentChannel}
-            onClose={() => {
-              useUIStore.getState().setPlayerVisible(false);
-              useChannelStore.getState().setCurrentChannel(null);
-            }}
+            onClose={handleClosePlayer}
           />
         )}
       </div>

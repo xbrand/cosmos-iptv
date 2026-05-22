@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@react-native-community/hooks": "^100.1.0",
     "hls.js": "^1.5.0",
     "nanoid": "^5.0.0",
     "react": "^18.3.1",
