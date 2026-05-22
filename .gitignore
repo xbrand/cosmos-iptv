@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+
+# Build
+web-build/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Debug
+npm-debug.log*
+yarn-error.log*
+
+# Metro
+.metro-health-check*
+
+# Capacitor
+android/
+ios/
+capacitor.config.ts
+
+# Testing
+coverage/

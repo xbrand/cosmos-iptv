@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "Cosmos IPTV",
+    "slug": "cosmos-iptv",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a1a"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.cosmos.iptv",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Required for TV OS",
+        "UILaunchStoryboardName": "SplashScreen"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0a0a1a"
+      },
+      "package": "com.cosmos.iptv",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-screen-orientation",
+      [
+        "expo-updates",
+        {
+          "username": "cosmos-iptv"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
