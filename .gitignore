@@ -26,10 +26,8 @@ yarn-error.log*
 # Metro
 .metro-health-check*
 
-# Capacitor
-android/
-ios/
-capacitor.config.ts
+# Capacitor (native projects are committed)
+# capacitor.config.ts
 
 # Testing
 coverage/
